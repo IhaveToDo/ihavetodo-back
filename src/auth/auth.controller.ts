@@ -22,8 +22,8 @@ import {
 } from '@nestjs/swagger';
 import { LoginStatus } from './interfaces/login-status.interface';
 
-@Controller('auth')
-@ApiTags('auth')
+@Controller('api/auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

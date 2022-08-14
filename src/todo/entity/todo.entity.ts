@@ -22,4 +22,6 @@ export class TodoEntity {
 
   @OneToMany((type) => TaskEntity, (task) => task.todo)
   tasks?: TaskEntity[];
+
+  @Column({ type: 'boolean', default: false, nullable: true }) isDone: boolean;
 }

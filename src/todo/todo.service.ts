@@ -39,13 +39,20 @@ export class TodoService {
     return toTodoDto(todo);
   }
 
+  async getTodoByType({ username }: UserDto, type: string): Promise<TodoDto[]> {
+    const owner = await this.usersService.findOne({ where: { username } });
+    const todos = await this.todoRepo.find({
+      where: { owner, type },
+      relations: ['tasks', 'owner'],
+    });
+    return todos.map((todo) => toTodoDto(todo));
+  }
+
   async createTodo(
     { username }: UserDto,
     createTodoDto: TodoCreateDto,
   ): Promise<TodoDto> {
     const { title, type } = createTodoDto;
-
-    // get the user from db
     const owner = await this.usersService.findOne({ where: { username } });
 
     const todo: TodoEntity = await this.todoRepo.create({
@@ -59,8 +66,144 @@ export class TodoService {
     return toTodoDto(todo);
   }
 
+  async createTodoEveryday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_EVERYDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoTuesday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_TUESDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoMonday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_MONDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoWednesday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_WEDNESDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoThursday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_THURSDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoFriday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_FRIDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoSaturday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_SATURDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
+  async createTodoSunday(
+    { username }: UserDto,
+    title: string,
+  ): Promise<TodoDto> {
+    const owner = await this.usersService.findOne({ where: { username } });
+
+    const todo: TodoEntity = await this.todoRepo.create({
+      title,
+      type: 'TYPE_SUNDAY',
+      owner,
+    });
+
+    await this.todoRepo.save(todo);
+
+    return toTodoDto(todo);
+  }
+
   async updateTodo(id: string, todoDto: TodoDto): Promise<TodoDto> {
-    const { title, type } = todoDto;
+    const { title, type, isDone } = todoDto;
 
     let todo: TodoEntity = await this.todoRepo.findOne({ where: { id } });
 
@@ -75,6 +218,7 @@ export class TodoService {
       id,
       title,
       type,
+      isDone,
     };
 
     await this.todoRepo.update({ id }, todo); // update

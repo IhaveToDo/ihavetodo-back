@@ -13,6 +13,6 @@ export class TaskEntity {
   @Column({ type: 'varchar', nullable: false }) title: string;
   @CreateDateColumn() createdOn?: Date;
 
-  @ManyToOne((type) => TodoEntity, (todo) => todo.tasks)
+  @ManyToOne(() => TodoEntity, (todo) => todo.tasks)
   todo?: TodoEntity;
 }

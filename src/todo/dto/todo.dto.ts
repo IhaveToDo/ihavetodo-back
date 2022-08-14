@@ -24,4 +24,6 @@ export class TodoDto {
 
   @ApiProperty({ description: 'todo tasks' })
   tasks?: TaskDto[];
+
+  isDone: boolean;
 }
