@@ -9,7 +9,6 @@ import {
   UseGuards,
   Req,
 } from '@nestjs/common';
-import { TodoListDto } from './dto/todo.list.dto';
 import { TodoDto } from './dto/todo.dto';
 import { TodoCreateDto } from './dto/todo.create.dto';
 import { TodoService } from './todo.service';
@@ -23,20 +22,20 @@ export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
   @Get()
-  async findAll(): Promise<TodoListDto> {
+  async findAll(): Promise<TodoDto[]> {
     const todos = await this.todoService.getAllTodo();
-    return { todos };
+    return todos;
   }
 
   @Get('findByType/:type')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async findByTag(
     @Param('type') type: string,
     @Req() req: any,
-  ): Promise<TodoListDto> {
+  ): Promise<TodoDto[]> {
     const user = req.user as UserDto;
     const todos = await this.todoService.getTodoByType(user, type);
-    return { todos };
+    return todos;
   }
 
   @Get(':id')
@@ -45,7 +44,7 @@ export class TodoController {
   }
 
   @Post()
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async create(
     @Body() createTodoDto: TodoCreateDto,
     @Req() req: any,
@@ -56,7 +55,7 @@ export class TodoController {
   }
 
   @Post('everyday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoEveryday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -68,7 +67,7 @@ export class TodoController {
   }
 
   @Post('monday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoMonday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -79,7 +78,7 @@ export class TodoController {
     return await this.todoService.createTodoMonday(user, title);
   }
   @Post('tuesday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoTuesday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -102,7 +101,7 @@ export class TodoController {
   }
 
   @Post('thursday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoThursday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -113,8 +112,7 @@ export class TodoController {
     return await this.todoService.createTodoThursday(user, title);
   }
 
-  @Post('saturday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoSaturday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -126,7 +124,7 @@ export class TodoController {
   }
 
   @Post('friday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoFriday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -138,7 +136,7 @@ export class TodoController {
   }
 
   @Post('sunday')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async createTodoSunday(
     @Body() body: { title: string },
     @Req() req: any,
@@ -150,7 +148,7 @@ export class TodoController {
   }
 
   @Put(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async update(
     @Param('id') id: string,
     @Body() todoDto: TodoDto,
@@ -159,7 +157,7 @@ export class TodoController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async destory(@Param('id') id: string): Promise<TodoDto> {
     return await this.todoService.destoryTodo(id);
   }

@@ -31,7 +31,7 @@ export class TaskController {
   }
 
   @Post('todo/:id')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async create(
     @Param('id') todo: string,
     @Body() createTaskDto: CreateTaskDto,
@@ -40,7 +40,7 @@ export class TaskController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   async destory(@Param('id') id: string): Promise<TaskDto> {
     return await this.taskService.destoryTask(id);
   }

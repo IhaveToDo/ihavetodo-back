@@ -29,6 +29,10 @@ DB_HOST
 DB_NAME
 ```
 
+## Api document
+
+APi 문서가 /api-docs 경로에 있습니다.(Swagger)
+
 ## 주의사항
 
 ### ※ 해당 프로젝트는 IWOP 24기 여름방학 프로젝트로, 실제 배포된 프로젝트가 아닙니다. 지원 여부는 알 수 없습니다.
