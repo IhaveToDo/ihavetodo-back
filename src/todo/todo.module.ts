@@ -11,12 +11,12 @@ import { UsersModule } from '@user/users.module';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [
-    UsersModule,
-    AuthModule,
-    TypeOrmModule.forFeature([TodoEntity, TaskEntity, UserEntity]),
-  ],
-  controllers: [TodoController, TaskController],
-  providers: [TodoService, TaskService],
+    imports: [
+        UsersModule,
+        AuthModule,
+        TypeOrmModule.forFeature([TodoEntity, TaskEntity, UserEntity]),
+    ],
+    controllers: [TodoController, TaskController],
+    providers: [TodoService, TaskService],
 })
 export class TodoModule {}

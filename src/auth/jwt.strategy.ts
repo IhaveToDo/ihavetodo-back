@@ -9,18 +9,18 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
-    super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: JWT_SECRET,
-    });
-  }
-
-  async validate(payload: JwtPayload): Promise<UserDto> {
-    const user = await this.authService.validateUser(payload);
-    if (!user) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+    constructor(private readonly authService: AuthService) {
+        super({
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            secretOrKey: JWT_SECRET,
+        });
     }
-    return user;
-  }
+
+    async validate(payload: JwtPayload): Promise<UserDto> {
+        const user = await this.authService.validateUser(payload);
+        if (!user) {
+            throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+        }
+        return user;
+    }
 }

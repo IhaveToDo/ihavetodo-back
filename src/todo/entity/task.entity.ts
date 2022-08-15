@@ -1,18 +1,18 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  ManyToOne,
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    ManyToOne,
 } from 'typeorm';
 import { TodoEntity } from '@todo/entity/todo.entity';
 
 @Entity('task')
 export class TaskEntity {
-  @PrimaryGeneratedColumn('uuid') id: string;
-  @Column({ type: 'varchar', nullable: false }) title: string;
-  @CreateDateColumn() createdOn?: Date;
+    @PrimaryGeneratedColumn('uuid') id: string;
+    @Column({ type: 'varchar', nullable: false }) title: string;
+    @CreateDateColumn() createdOn?: Date;
 
-  @ManyToOne(() => TodoEntity, (todo) => todo.tasks)
-  todo?: TodoEntity;
+    @ManyToOne(() => TodoEntity, (todo) => todo.tasks)
+    todo?: TodoEntity;
 }

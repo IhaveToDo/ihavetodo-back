@@ -6,44 +6,44 @@ import { UserEntity } from '@user/entity/user.entity';
 import { UserDto } from '@user/dto/user.dto';
 
 export const toTodoDto = (data: TodoEntity): TodoDto => {
-  const { id, title, tasks, owner, type, isDone } = data;
+    const { id, title, tasks, owner, type, isDone } = data;
 
-  let todoDto: TodoDto = {
-    id,
-    title,
-    owner: owner ? toUserDto(owner) : null,
-    type,
-    isDone,
-  };
-
-  if (tasks) {
-    todoDto = {
-      ...todoDto,
-      tasks: tasks.map((task: TaskEntity) => toTaskDto(task)),
+    let todoDto: TodoDto = {
+        id,
+        title,
+        owner: owner ? toUserDto(owner) : null,
+        type,
+        isDone,
     };
-  }
 
-  return todoDto;
+    if (tasks) {
+        todoDto = {
+            ...todoDto,
+            tasks: tasks.map((task: TaskEntity) => toTaskDto(task)),
+        };
+    }
+
+    return todoDto;
 };
 
 export const toTaskDto = (data: TaskEntity): TaskDto => {
-  const { id, title } = data;
+    const { id, title } = data;
 
-  const taskDto: TaskDto = {
-    id,
-    title,
-  };
+    const taskDto: TaskDto = {
+        id,
+        title,
+    };
 
-  return taskDto;
+    return taskDto;
 };
 
 export const toUserDto = (data: UserEntity): UserDto => {
-  const { id, username } = data;
+    const { id, username } = data;
 
-  const userDto: UserDto = {
-    id,
-    username,
-  };
+    const userDto: UserDto = {
+        id,
+        username,
+    };
 
-  return userDto;
+    return userDto;
 };
