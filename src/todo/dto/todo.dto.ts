@@ -5,18 +5,33 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class TodoDto {
     @IsNotEmpty()
-    @ApiProperty({ description: 'todo id' })
+    @ApiProperty({
+        example: '할일 1',
+        description: 'todo id',
+        required: true,
+    })
     id: string;
 
     @IsNotEmpty()
-    @ApiProperty({ description: 'todo 타이틀' })
+    @ApiProperty({
+        example: '할일 1',
+        description: '할일 이름',
+        required: true,
+    })
     title: string;
 
     @IsNotEmpty()
-    @ApiProperty({ description: 'todo type' })
+    @ApiProperty({
+        example: 'TYPE_EVERYDAY',
+        description: '할일 타입',
+        required: true,
+    })
     type: string;
 
-    @ApiProperty({ description: 'todo 생성 시점' })
+    @ApiProperty({
+        example: 'TYPE_EVERYDAY',
+        description: '할일 생성 시점',
+    })
     createdOn?: Date;
 
     @ApiProperty({ description: 'todo 생성 owner(UserDto)' })

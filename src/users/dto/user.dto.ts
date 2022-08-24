@@ -3,11 +3,14 @@ import { IsNotEmpty } from 'class-validator';
 
 export class UserDto {
     @IsNotEmpty()
-    @ApiProperty({ description: '유저이름' })
     id: string;
 
     @IsNotEmpty()
-    @ApiProperty({ description: '유저이름' })
+    @ApiProperty({
+        example: 'testUser1',
+        description: '유저이름',
+        required: true,
+    })
     username: string;
 
     @ApiProperty({ description: '생성 시점' })

@@ -66,6 +66,10 @@ export class AuthController {
     }
 
     @Get('whoami')
+    @ApiOperation({
+        summary: '유저 내 정보',
+        description: '유저 내 정보 API',
+    })
     @UseGuards(AuthGuard('jwt'))
     public async testAuth(@Req() req: any): Promise<JwtPayload> {
         return req.user;
